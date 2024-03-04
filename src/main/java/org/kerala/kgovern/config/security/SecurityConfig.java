@@ -18,9 +18,11 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(auth ->
                         auth
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+//                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/employee/**").hasAnyRole("ADMIN","EMPLOYEE")
+//                                .requestMatchers("/head").hasAnyRole("HEAD","ADMIN")
                                 .requestMatchers("/user/**").hasAnyRole("ADMIN","USER")
-                                .requestMatchers("/login","/signup","/home/**").permitAll()
+                                .requestMatchers("/login","/signup","/home/**","/**").permitAll()
                                 .anyRequest().authenticated())
                 .formLogin(login ->
                         login
@@ -39,7 +41,7 @@ public class SecurityConfig {
     public WebSecurityCustomizer securityCustomizer(){
         return (web) -> web
                 .ignoring()
-                .requestMatchers("/images/**","/css/**","/js/**","/scss/**","/fonts/**","/vendor/**","/.sass-cache");
+                .requestMatchers("/img/**","/images","/css/**","/js/**","/scss/**","/fonts/**","/vendor/**","/.sass-cache");
     }
     @Bean
     public AuthenticationSuccessHandler authenticationSuccessHandler(){

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>K-Govern</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon" />
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/glightbox/css/glightbox.min.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:include="~{/fragments/navbar :: navigation}"></div>
+<!-- End Hero -->
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-title mt-5">
+            <h2><span th:text="${department}"></span> Department</h2>
+        </div>
+        <a class="d-flex justify-content-end" th:href="@{'/user/service/'+${department}+'/addComplaint'}">
+            <button class="bg-primary rounded-4 text-white border-0" style="width: 180px; height: 40px;">Report a complaint</button>
+        </a>
+    </div>
+</section>
+<div class="d-flex justify-content-center">
+    <p style="max-width: 800px; font-size: 17px">If you face any difficulty or issues with this department please raise a complaint to <span th:text="${department}"></span> department</p>
+</div>
+<script th:src="@{/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/vendor/aos/aos.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

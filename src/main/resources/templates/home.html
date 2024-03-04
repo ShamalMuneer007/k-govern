@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns="http://www.w3.org/1999/html"
+  xmlns:th="http://www.thymeleaf.org"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>K-Govern</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon" />
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+      th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+      rel="stylesheet"
+    />
+    <link
+      th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet" />
+    <link
+      th:href="@{/vendor/glightbox/css/glightbox.min.css}"
+      rel="stylesheet"
+    />
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <div th:include="~{/fragments/navbar :: navigation}"></div>
+    <section id="hero" class="d-flex align-items-center">
+      <div class="container">
+        <div class="row">
+          <div
+            class="col-lg-6 pt-5 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center"
+          >
+            <h1 data-aos="fade-up">K-Govern Connect,<br>The change starts here.</h1>
+            <h2 data-aos="fade-up" data-aos-delay="400">
+              Your issues, our mission. Building a better Kerala.
+            </h2>
+            <div data-aos="fade-up" data-aos-delay="800">
+              <a href="#about" class="btn-get-started scrollto">About us</a>
+            </div>
+          </div>
+          <div
+            class="col-lg-6 order-1 order-lg-2 hero-img"
+            data-aos="fade-left"
+            data-aos-delay="200"
+          >
+            <img
+              th:src="@{/img/hero-img.png}"
+              class="img-fluid animated"
+              alt=""
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero -->
+    <section id="services" class="services">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <p>Services offered by our government</p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="200" >
+              <div class="icon"><i class="bx bx-heart"></i></div>
+              <h4 class="title"><a th:href="@{/service/health}">Health</a></h4>
+              <p class="description" style="width: 230px">For good health</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="300" >
+              <div class="icon"><i class="bx bx-book"></i></div>
+              <h4 class="title"><a th:href="@{/service/education}">Education</a></h4>
+              <p class="description" style="width: 230px">Best Education</p>
+            </div>
+          </div>
+
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bx-shield"></i></div>
+              <h4 class="title"><a th:href="@{/service/home}">Home</a></h4>
+              <p class="description" style="width: 230px">Protection services for family</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bx-bus"></i></div>
+              <h4 class="title"><a th:href="@{/service/transport}">Transport</a></h4>
+              <p class="description" style="width: 230px">Transport services</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bx-cloud-lightning"></i></div>
+              <h4 class="title"><a th:href="@{/service/power}">Power</a></h4>
+              <p class="description" style="width: 230px">KSEB</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bxs-tree"></i></div>
+              <h4 class="title"><a th:href="@{/service/forest}">Forest</a></h4>
+              <p class="description" style="width: 230px">Forest department</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bx-crop"></i></div>
+              <h4 class="title"><a th:href="@{/service/agriculture}">Agriculture</a></h4>
+              <p class="description" style="width: 230px">Agriculture department</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400">
+              <div class="icon"><i class="bx bx-water"></i></div>
+              <h4 class="title"><a th:href="@{/service/water}">Water</a></h4>
+              <p class="description" style="width: 230px">Water authority</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bx-money"></i></div>
+              <h4 class="title"><a th:href="@{/service/revenue}">Revenue</a></h4>
+              <p class="description" style="width: 230px">Kerala revenue department</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0">
+            <div class="icon-box" data-aos="fade-up" data-aos-delay="400" >
+              <div class="icon"><i class="bx bx-face"></i></div>
+              <h4 class="title"><a th:href="@{/service/tourism}">Tourism</a></h4>
+              <p class="description" style="width: 230px">Kerala tourism department</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Services Section -->
+    <script th:src="@{/vendor/purecounter/purecounter_vanilla.js}"></script>
+    <script th:src="@{/vendor/aos/aos.js}"></script>
+    <script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+    <script th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+    <script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+    <script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+    <!-- Template Main JS File -->
+    <script th:src="@{/js/main.js}"></script>
+  </body>
+</html>

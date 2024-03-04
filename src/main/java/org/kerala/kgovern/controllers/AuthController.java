@@ -31,12 +31,13 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
         if (!(authentication instanceof AnonymousAuthenticationToken)){
-//            if(roles.contains("ADMIN")){
-//                return "redirect:/home";//Redirects admin to his dashboard if he tries to go back to log-in page
-//            }
-//            if(roles.contains("USER")){
-//                return "redirect:/home";//Redirects authenticated user to home page if he tries to go back to log-in page
-//            }
+            log.info(authentication.getName());
+            if(roles.contains("ADMIN")){
+                return "redirect:/home";//Redirects admin to his dashboard if he tries to go back to log-in page
+            }
+            if(roles.contains("USER")){
+                return "redirect:/home";//Redirects authenticated user to home page if he tries to go back to log-in page
+            }
             return "redirect:/home";
         }
         log.info("In login page");
@@ -76,11 +77,11 @@ public class AuthController {
             userService.registerUser(userRegisterDto);
         }
         catch (Exception e){
-            log.error("Something went wrong while registering the user");
+            log.error("Something went wrong while registering the user {}",e.getMessage());
             throw new InternalServerError("Something went wrong while registering the user");
         }
         log.info("User registered successfully!");
-        redirectAttributes.addFlashAttribute("message","User has registered successfully !");
+        redirectAttributes.addFlashAttribute("message","User has registered successfully!.. Login now!");
         return "redirect:/login";
     }
 }

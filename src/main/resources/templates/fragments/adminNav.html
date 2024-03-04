@@ -1,0 +1,56 @@
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .nav_link {
+            cursor: pointer;
+        }
+    </style>
+    <title></title>
+</head>
+
+<body id="body-pd">
+<div th:fragment="navigation">
+<!--    <header class="header" id="header">-->
+
+<!--        <div>-->
+<!--            <div class="header_img"><svg height="1em" viewBox="0 0 448 512"-->
+<!--                                         xmlns="http://www.w3.org/2000/svg">&lt;!&ndash;! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. &ndash;&gt;-->
+<!--                <path-->
+<!--                        d="M304 128a80 80 0 1 0 -160 0 80 80 0 1 0 160 0zM96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM49.3 464H398.7c-8.9-63.3-63.3-112-129-112H178.3c-65.7 0-120.1 48.7-129 112zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3z" />-->
+<!--            </svg>-->
+<!--                <span></span>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </header>-->
+    <div class="l-navbar collapse show" id="nav-bar">
+        <nav class="nav">
+            <div class="">
+                <a class="nav_logo" href="#"> <span class="nav_logo-name">K Connect</span> </a>
+            </div>
+            <div class="nav_list">
+                <a class="nav_link" th:classappend="${requestURI.startsWith('/admin/dashboard/')? 'active' : ''}"
+                   th:href="@{/admin/dashboard/sales-report}"> <i class='bx bxs-chalkboard nav_icon'></i> <span
+                        class="nav_name">Dashboard</span>
+                </a>
+                <a class="nav_link"
+                   th:classappend="${requestURI == '/admin/users' ? 'active' : ''}"
+                   th:href="@{/admin/users/list}"> <i class='bx bx-user nav_icon'></i><span class="nav_name">Users</span> </a>
+                <a class="nav_link"
+                   th:classappend="${requestURI.startsWith('/admin/departments') ? 'active' : ''}"
+                   th:href="@{/admin/departments}"> <i class="bx bx-accessibility"></i><span>Departments</span> </a>
+            </div>
+        </nav>
+    </div>
+    <div class="bg-success mt-2 pt-1 text-white text-center fw-semibold" style="height:30px;border-radius:5px;"
+         th:if="${message}" th:text="${message}"></div>
+    <div class="bg-danger mt-2 pt-1 text-white text-center fw-semibold" style="height:30px;border-radius:5px;"
+         th:if="${errMessage}" th:text="${errMessage}"></div>
+</div>
+</body>
+
+</html>

@@ -11,6 +11,6 @@ public class UserRegisterDto {
     private String username;
     private String password;
     private String email;
-    private Integer aadhaarId;
-    private Integer phoneNumber;
+    private String aadhaarId;
+    private String phoneNumber;
 }

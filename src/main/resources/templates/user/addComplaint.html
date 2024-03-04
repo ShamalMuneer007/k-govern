@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>K-Govern</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon" />
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/glightbox/css/glightbox.min.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+</head>
+<body>
+<div th:include="~{/fragments/navbar :: navigation}"></div>
+<!-- End Hero -->
+<section id="services" class="services mt-1">
+    <div class="container">
+        <div class="section-title mt-5">
+            <h2>Raise Complaint</h2>
+        </div>
+            <hr>
+            <div class="d-flex justify-content-center">
+                <form class="mt-5 card p-5 shadow" style="width: 700px;" method="post" th:action="@{'/user/service/'+${department}+'/addComplaint'}">
+                    <h5 class="fw-semibold">District</h5>
+                    <select name="district" class="p-2" required>
+                        <option th:each="item : ${districts}"
+                                th:text="${item}"
+                                th:value="${item}"
+                        class="p-2">
+                        </option>
+                    </select>
+                    <h5 class="fw-semibold mt-3">Complaint Subject</h5>
+                    <input name="complaintSub" class="rounded-2 p-2" required type="text"/>
+                    <h5 class="fw-semibold mt-3">Complaint Content</h5>
+                    <textarea name="complaint" class="rounded-2 p-2" required type="text" style="height: 100px;"></textarea>
+                    <div class="d-flex justify-content-center">
+                    <button type="submit" class="btn-primary bg-primary mt-4 border-0 rounded-3 text-white" style="width: 100px; height: 40px;">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section><!-- End Services Section -->
+<script th:src="@{/vendor/purecounter/purecounter_vanilla.js}"></script>
+<script th:src="@{/vendor/aos/aos.js}"></script>
+<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
+<script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
+<script th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
+<script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
+<script th:src="@{/vendor/php-email-form/validate.js}"></script>
+
+<!-- Template Main JS File -->
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>

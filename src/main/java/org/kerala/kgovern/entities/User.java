@@ -1,9 +1,6 @@
 package org.kerala.kgovern.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import org.kerala.kgovern.Enums.Role;
 
@@ -15,12 +12,13 @@ import org.kerala.kgovern.Enums.Role;
 @NoArgsConstructor
 public class User {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userId;
     private String username;
     private String password;
     private String email;
-    private Integer aadhaarNumber;
-    private Integer phoneNumber;
+    private String aadhaarNumber;
+    private String phoneNumber;
     @Enumerated(EnumType.STRING)
     private Role role;
 }
