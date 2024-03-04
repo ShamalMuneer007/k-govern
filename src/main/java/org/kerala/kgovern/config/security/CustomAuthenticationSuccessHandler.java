@@ -27,7 +27,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
             log.info("++++ HELLO ADMIN ++++");
             response.sendRedirect("/admin/departments");
         }
-        if(authorities.contains(new SimpleGrantedAuthority(Role.ROLE_EMPLOYEE.name()))){
+        else if(authorities.contains(new SimpleGrantedAuthority(Role.ROLE_EMPLOYEE.name()))){
             response.sendRedirect("/employee/");
         }
         else{

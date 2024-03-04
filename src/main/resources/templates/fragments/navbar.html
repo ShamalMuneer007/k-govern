@@ -71,7 +71,11 @@
                 <ul>
                   <li><a th:href="@{/user/complaints}">Complaints</a></li>
                   <li><a href="#">Settings</a></li>
-                  <li><a href="#">.....</a></li>
+                  <li>
+                    <form th:action="@{/logout}" method="post" class="flex justify-content-center">
+                    <button class="text-danger bg-white ps-3 border-0">Logout</button>
+                    </form>
+                  </li>
                   <li><a href="#">.....</a></li>
                 </ul>
               </li>

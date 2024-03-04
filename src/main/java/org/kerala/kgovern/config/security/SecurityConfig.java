@@ -18,7 +18,7 @@ public class SecurityConfig {
         httpSecurity
                 .authorizeHttpRequests(auth ->
                         auth
-//                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/admin/**").hasRole("ADMIN")
                                 .requestMatchers("/employee/**").hasAnyRole("ADMIN","EMPLOYEE")
 //                                .requestMatchers("/head").hasAnyRole("HEAD","ADMIN")
                                 .requestMatchers("/user/**").hasAnyRole("ADMIN","USER")

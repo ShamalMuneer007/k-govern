@@ -68,7 +68,11 @@
                 <a href="#"
                   >Profile Settings</a>
               </li>
-              <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+                <li class="ps-3">
+                    <form th:action="@{/logout}" method="post" class="flex justify-content-center">
+                        <button class="text-danger bg-white border-0">Logout</button>
+                    </form>
+                </li>
             </ul>
             <i class="bi bi-list mobile-nav-toggle"></i>
           </nav>

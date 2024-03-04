@@ -43,6 +43,8 @@
                 <a class="nav_link"
                    th:classappend="${requestURI.startsWith('/admin/departments') ? 'active' : ''}"
                    th:href="@{/admin/departments}"> <i class="bx bx-accessibility"></i><span>Departments</span> </a>
+                <form class="nav_link"
+                   th:action="@{/logout}" method="post"><button type="submit" class="bg-white border-0 text-danger"><i class="bx bx-power-off pe-2"></i>Logout</button></form>
             </div>
         </nav>
     </div>
