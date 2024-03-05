@@ -96,10 +96,10 @@ public class AdminController {
         return "redirect:/admin/departments";
 
     }
-    @GetMapping("/users")
-    public String getUsers(Model model, HttpServletRequest request){
-        List<User> users = userService.getAllUsers();
-        model.addAttribute("users",users);
-        return "admin/users";
-    }
+//    @GetMapping("/users")
+//    public String getUsers(Model model, HttpServletRequest request){
+//        List<User> users = userService.getAllUsers();
+//        model.addAttribute("users",users);
+//        return "admin/users";
+//    }
 }
