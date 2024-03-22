@@ -11,4 +11,5 @@ public interface DepartmentComplaintRepository extends JpaRepository<DepartmentC
     List<DepartmentComplaint> findByDepartmentAndDistrict(String department,String district);
 
     List<DepartmentComplaint> findByUserUsername(String username);
+
 }

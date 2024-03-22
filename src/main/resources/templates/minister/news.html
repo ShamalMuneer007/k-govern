@@ -39,6 +39,22 @@
     />
     <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
     <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+    <style>
+        .check{
+            font-size: 20px;
+            transition: color 0.4s;
+        }
+        .check:hover{
+            color: forestgreen;
+        }
+        .pointer{
+            cursor: pointer;
+        }
+    </style>
     <style>
         .check{
             font-size: 20px;
@@ -70,28 +86,24 @@
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
         }
     </style>
-    <!-- Template Main CSS File -->
-    <link th:href="@{/css/style2.css}" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 </head>
 <body>
-<div th:include="~{frags/navbar :: navigation}"></div>
-<!-- End Hero -->
-<section id="services" class="services">
-    <div class="container">
-        <div class="section-title mt-5">
-            <h2><span th:text="${department}"></span> Department</h2>
-        </div>
-        <a class="d-flex justify-content-end" th:href="@{'/user/service/'+${department}+'/addComplaint'}">
-            <button class="bg-primary rounded-4 text-white border-0" style="width: 180px; height: 40px;">Report a complaint</button>
+<div th:include="~{frags/ministerNav :: navigation}"></div>
+<div class="container">
+    <div class="section-title pt-2 mt-5">
+        <h2><span th:text="${department}"></span> Department News</h2>
+    </div>
+    <div class="fw-semibold border rounded" style="font-size: 22px">District : <span th:text="${district}"></span></div>
+    <div class="d-flex justify-content-end mt-5">
+        <a th:href="@{/minister/news/add-news}">
+            <button
+                    class="rounded-2 bg-primary text-white fw-semibold p-2 border-0">Add News</button>
         </a>
     </div>
-</section>
-<div class="d-flex justify-content-center">
-    <p style="max-width: 800px; font-size: 17px">If you face any difficulty or issues with this department please raise a complaint to <span th:text="${department}"></span> department</p>
+    <hr>
+    <div class="text-decoration-underline fw-bold text-center mt-2" style="font-size: 20px">News</div>
 </div>
-<hr/>
-<div class="text-center fw-bold" style="font-size: 22px">NEWS</div>
+<!--    <img class="d-block w-100" th:src="@{'/uploads/'+${news.get(0).getImage()}}" alt="First slide">-->
 <div class="d-flex justify-content-center align-items-center" style="height: 55vh">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
@@ -113,8 +125,8 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+
 </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script></body>
 </html>

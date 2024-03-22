@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>K-Govern</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon" />
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/glightbox/css/glightbox.min.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+    <style>
+        .check{
+            font-size: 20px;
+            transition: color 0.4s;
+        }
+        .check:hover{
+            color: forestgreen;
+        }
+    </style>
+</head>
+<body>
+<div th:include="~{frags/navbar :: navigation}"></div>
+<div class="container">
+    <div class="section-title pt-2 mt-5">
+        <h2><span th:text="${department}"></span> Department Complaint</h2>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow border-1 p-5 pt-3">
+            <div class="card-body" style="font-size: 19px;">
+                <div class="pt-3"><span class="fw-bold mt-5"> Complaint Id : </span><span th:text="${complaint.getComplaintId()}"></span></div>
+                <div class="pt-3"><span class="fw-bold mt-5"> Issued at: </span><span th:text="${#temporals.format(complaint.getIssuedDateTime(), 'yyyy-MM-dd HH:mm:ss')}"></span></div>
+                <div class="pt-3"> <span class="fw-bold mt-5" > Subject : </span> <span th:text="${complaint.getComplaintSubject()}"></span></div>
+                <div class="pt-3"><span class="fw-bold mt-5"> Complaint :</span>
+                    <div><span class="bx bxs-circle pe-2" style="font-size: 10px"></span><span class="text-wrap" th:text="${complaint.getComplaint()}"></span></div></div>
+                <div class="pt-3"><span class="fw-bold mt-5">  District :</span> <span th:text="${complaint.getDistrict()}"></span></div>
+                <div class="pt-3"><span class="fw-bold mt-5">  Status :</span> <span th:text="${complaint.getStatus().name().replace('_',' ')}"></span></div>
+                <div class="select-wrapper" th:if='${complaint.getStatus().name().equals("NO_RESPONSE")}'>
+                    <form th:action="@{'/user/complaint/addHigherMessage/'+${complaint.getComplaintId()}}" method="post">
+                        <div>
+                            <div class="mt-2">Message for not responding to the issue : </div>
+                            <textarea name="message" style="width: 100%; font-size: 16px" class="p-3" id="response" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-primary fw-semibold text-white rounded-2 border-0 p-2" style="font-size: 14px">Apply</button>
+                        </div>
+                    </form>
+                </div>
+                <div th:unless='${complaint.getStatus().name().equals("NO_RESPONSE") || complaint.getStatus().name().equals("PENDING")}'>
+                    <div th:unless="${complaint.getResponse() == null}" class="fw-bold mt-2">
+                        Response :
+                        <div class="fw-normal">
+                            <span class="bx bxs-circle" style="font-size: 11px;"></span>
+                            <span th:text="${complaint.getResponse()}">
+
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

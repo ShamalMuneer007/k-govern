@@ -53,32 +53,39 @@
     <div class="container">
 
         <div class="section-title">
-            <h2><span th:text="${department}"></span> Department</h2>
+            <h2>Department Minister</h2>
         </div>
         <div style="height: 100vh;">
             <div style="width: 100%;">
-                <h2 class="section-title text-center" style="font-size: 20px">Add Employee</h2>
+                <h2 class="section-title text-center" style="font-size: 20px">Add Department Minister</h2>
             </div>
             <hr>
             <div class="d-flex justify-content-center">
-          <form class="mt-5 card p-5 shadow" style="width: 45%;" method="post" th:action="@{'/admin/add-employee/'+${department}}">
-              <h5 class="fw-semibold">District</h5>
-              <select name="district" class="p-3" required>
-                  <option th:each="item : ${districts}"
-                          th:text="${item}"
-                          th:value="${item}">
-                  </option>
-              </select>
-              <h5 class="fw-semibold mt-3">Employee Name</h5>
-              <input name="username" class="rounded-2 p-2" minlength="3" required type="text"/>
-              <h5 class="fw-semibold mt-3">Employee Temp password</h5>
-              <input name="password" class="rounded-2 p-2" required minlength="8" type="password"/>
-              <h5 class="fw-semibold mt-3">Aadhaar Number</h5>
-              <input name="aadhaarId" class="rounded-2 p-2" minlength="12" maxlength="12" required type="text" pattern="\d*" oninput="validateInput(this)">
-              <h5 class="fw-semibold mt-3" >Phone Number</h5>
-              <input name="phoneNumber" class="rounded-2 p-2" minlength="10" maxlength="10" required type="text" pattern="\d*" oninput="validateInput(this)">
-              <button type="submit" class="btn-primary bg-primary mt-4 border-0 rounded-2 text-white">Submit</button>
-          </form>
+                <form class="mt-5 card p-5 shadow" style="width: 45%;" method="post" th:action="@{'/admin/minister/add-minister'}">
+                    <h5 class="fw-semibold">District</h5>
+                    <select name="district" class="p-3" required>
+                        <option th:each="item : ${districts}"
+                                th:text="${item}"
+                                th:value="${item}">
+                        </option>
+                    </select>
+                    <h5 class="fw-semibold mt-3">Department</h5>
+                    <select name="department" class="p-3" required>
+                        <option th:each="item : ${departments}"
+                                th:text="${item}"
+                                th:value="${item}">
+                        </option>
+                    </select>
+                    <h5 class="fw-semibold mt-3">Minister Name</h5>
+                    <input name="username" class="rounded-2 p-2" minlength="3" required type="text"/>
+                    <h5 class="fw-semibold mt-3">Minister Temp password</h5>
+                    <input name="password" class="rounded-2 p-2" required minlength="8" type="password"/>
+                    <h5 class="fw-semibold mt-3">Aadhaar Number</h5>
+                    <input name="aadhaarId" class="rounded-2 p-2" minlength="12" maxlength="12" required type="text" pattern="\d*" oninput="validateInput(this)">
+                    <h5 class="fw-semibold mt-3" >Phone Number</h5>
+                    <input name="phoneNumber" class="rounded-2 p-2" minlength="10" maxlength="10" required type="text" pattern="\d*" oninput="validateInput(this)">
+                    <button type="submit" class="btn-primary bg-primary mt-4 border-0 rounded-2 text-white">Submit</button>
+                </form>
             </div>
         </div>
     </div>

@@ -13,4 +13,5 @@ public interface UserService {
     void registerUser(UserRegisterDto userRegisterDto);
 
     List<User> getAllUsers();
+
 }

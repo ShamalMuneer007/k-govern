@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>K-Govern</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon" />
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/glightbox/css/glightbox.min.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+    <style>
+        .check{
+            font-size: 20px;
+            transition: color 0.4s;
+        }
+        .check:hover{
+            color: forestgreen;
+        }
+        .pointer{
+            cursor: pointer;
+        }
+        .box {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            background-color: white;
+        }
+    </style>
+</head>
+<body>
+<div th:include="~{frags/employeeNavbar :: navigation}"></div>
+<div class="container">
+    <div class="section-title pt-2 mt-5">
+        <h2><span th:text="${department}"></span> Department News</h2>
+    </div>
+    <div class="fw-semibold border rounded" style="font-size: 22px">District : <span th:text="${district}"></span></div>
+    <div class="d-flex justify-content-center mt-5 mb-5">
+        <div class="rounded-2 text-primary fw-bold" style="font-size: 22px">Post A News</div>
+    </div>
+</div>
+<hr>
+<div class="d-flex justify-content-center">
+    <form class="mt-5 card p-5 shadow" style="width: 700px;" method="post" th:action="@{/employee/news/add-news}" enctype="multipart/form-data">
+        <h5 class="fw-semibold">News Heading</h5>
+        <input name="newsHeading" class="p-2" required/>
+        <h5 class="fw-semibold mt-3">News Content</h5>
+        <textarea name="newsContent" class="rounded-2 p-2" required type="text" style="height: 100px;"></textarea>
+        <h5 class="fw-semibold mt-3">Expiry Date</h5>
+        <input name="expiryDate" class="rounded-2 p-2" required type="date" min="<?php echo date('Y-m-d'); ?>" />
+        <input type="file" class="mt-4" accept="image/*" name="file">
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn-primary bg-primary mt-4 border-0 rounded-3 text-white" style="width: 100px; height: 40px;">Submit</button>
+        </div>
+    </form>
+</div>
+<script>
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0
+    var yyyy = today.getFullYear();
+
+    // Set the minimum date for the input field
+    var minDate = yyyy + '-' + mm + '-' + dd;
+    document.querySelector('input[name="expiryDate"]').min = minDate;
+</script>
+</body>
+</html>

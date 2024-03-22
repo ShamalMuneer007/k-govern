@@ -43,42 +43,45 @@
     <!-- Template Main CSS File -->
     <link th:href="@{/css/style2.css}" rel="stylesheet" />
     <style>
-        .delete:hover{
-            color: red;
+        .check{
+            font-size: 20px;
+            transition: color 0.4s;
         }
-        .delete{
-            transition: color 0.3s;
+        .check:hover{
+            color: forestgreen;
         }
-        .pointer:hover{
-            background-color: gray;
+        .pointer{
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-<div th:include="~{frags/navbar :: navigation}"></div>
-<!-- End Hero -->
+<div th:include="~{frags/ministerNav :: navigation}"></div>
 <div class="container">
     <div class="section-title pt-2 mt-5">
-        <h2>Submitted Complaints</h2>
+        <h2><span th:text="${department}"></span> Department Unreported Complaints</h2>
     </div>
+    <div class="fw-semibold border rounded" style="font-size: 22px">District : <span th:text="${district}"></span></div>
 </div>
-<hr>
 <div class="table-responsive-md box mt-5 d-flex justify-content-center">
     <table class="table mt-5 text-center" style="width: 80%">
         <thead>
         <tr>
-            <th class="col-lg-3 bg-body-secondary" scope="col">Complaint ID</th>
+            <th  class="bg-body-secondary" scope="col">Complaint ID</th>
+            <th class="bg-body-secondary" scope="col">Complaint By</th>
             <th class="col-lg-3 bg-body-secondary" scope="col">Complaint Subject</th>
             <th class="bg-body-secondary" scope="col">Complaint</th>
+            <th class="bg-body-secondary" scope="col">Status</th>
             <th class="col-lg-3 bg-body-secondary" scope="col">District</th>
-            <th class="col-lg-3 bg-body-secondary" scope="col">Department</th>
-            <th class="col-lg-1 bg-body-secondary" scope="col">Status</th>
-            <th class="col-lg-1 bg-body-secondary" scope="col">Action</th>
         </tr>
         </thead>
-        <tbody th:each="complaint : ${complaints}" style="cursor: pointer;">
+        <tbody th:each="complaint : ${complaints}">
         <tr class="pointer">
-            <td th:text="${complaint.getComplaintId()}">
+            <td class="">
+                <div class="fw-semibold" th:text="${complaint.getComplaintId()}"></div>
+            </td>
+            <td class="">
+                <div class="fw-semibold" th:text="${complaint.getUser().getUsername()}"></div>
             </td>
             <td class="">
                 <div class="fw-semibold" th:text="${complaint.getComplaintSubject()}"></div>
@@ -86,21 +89,11 @@
             <td class="">
                 <div class="fw-semibold" th:text="${complaint.getComplaint()}"></div>
             </td>
+            <td>
+                <div th:text="${complaint.getStatus().name()}"></div>
+            </td>
             <td class="">
                 <div class="fw-semibold" th:text="${complaint.getDistrict()}"></div>
-            </td>
-            <td class="">
-                <div class="fw-semibold" th:text="${complaint.getDepartment()}"></div>
-            </td>
-            <td class="">
-                <div class="fw-semibold" th:text="${complaint.getStatus().name().replace('_',' ')}"></div>
-            </td>
-            <td>
-                <form class="d-inline" th:action="@{'/user/deleteComplaint/'+${complaint.getComplaintId()}}" method="post">
-                        <span class=""><button class="delete btn" data-target="#deleteModal" data-toggle="modal" id="categoryDelete" type="submit">
-                    <i class="bx bx-trash"></i>
-                  </button></span>
-                </form>
             </td>
         </tr>
         </tbody>
@@ -113,19 +106,9 @@
     tableRows.forEach(row => {
         row.addEventListener('click', () => {
             const complaintId = parseInt(row.querySelector('td:first-child').textContent.toString());
-            window.location.href = "/user/complaints/complaint-details/"+complaintId;
+            window.location.href = "/minister/complaints/complaint-details/"+complaintId;
         });
     });
 </script>
-<script th:src="@{/vendor/purecounter/purecounter_vanilla.js}"></script>
-<script th:src="@{/vendor/aos/aos.js}"></script>
-<script th:src="@{/vendor/bootstrap/js/bootstrap.bundle.min.js}"></script>
-<script th:src="@{/vendor/glightbox/js/glightbox.min.js}"></script>
-<script th:src="@{/vendor/isotope-layout/isotope.pkgd.min.js}"></script>
-<script th:src="@{/vendor/swiper/swiper-bundle.min.js}"></script>
-<script th:src="@{/vendor/php-email-form/validate.js}"></script>
-
-<!-- Template Main JS File -->
-<script th:src="@{/js/main.js}"></script>
 </body>
 </html>

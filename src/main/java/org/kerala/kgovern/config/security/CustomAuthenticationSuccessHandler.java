@@ -30,6 +30,9 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         else if(authorities.contains(new SimpleGrantedAuthority(Role.ROLE_EMPLOYEE.name()))){
             response.sendRedirect("/employee/");
         }
+        else if(authorities.contains(new SimpleGrantedAuthority(Role.ROLE_HEAD.name()))){
+            response.sendRedirect("/minister/");
+        }
         else{
             response.sendRedirect("/home");
         }

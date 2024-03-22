@@ -48,7 +48,7 @@
     </style>
 </head>
 <body>
-<div th:include="~{frags/adminNav :: navigation}"></div>
+<div th:include="~{frags/ministerNav :: navigation}"></div>
 <section id="services" class="services">
     <div class="container">
 
@@ -61,14 +61,7 @@
             </div>
             <hr>
             <div class="d-flex justify-content-center">
-          <form class="mt-5 card p-5 shadow" style="width: 45%;" method="post" th:action="@{'/admin/add-employee/'+${department}}">
-              <h5 class="fw-semibold">District</h5>
-              <select name="district" class="p-3" required>
-                  <option th:each="item : ${districts}"
-                          th:text="${item}"
-                          th:value="${item}">
-                  </option>
-              </select>
+          <form class="mt-5 card p-5 shadow" style="width: 45%;" method="post" th:action="@{'/minister/add-employee/'+${department}}">
               <h5 class="fw-semibold mt-3">Employee Name</h5>
               <input name="username" class="rounded-2 p-2" minlength="3" required type="text"/>
               <h5 class="fw-semibold mt-3">Employee Temp password</h5>

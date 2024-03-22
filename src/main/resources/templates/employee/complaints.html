@@ -50,6 +50,9 @@
         .check:hover{
             color: forestgreen;
         }
+        .pointer{
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -64,38 +67,48 @@
         <table class="table mt-5 text-center" style="width: 80%">
             <thead>
             <tr>
+                <th  class="bg-body-secondary" scope="col">Complaint ID</th>
                 <th class="bg-body-secondary" scope="col">Complaint By</th>
                 <th class="col-lg-3 bg-body-secondary" scope="col">Complaint Subject</th>
                 <th class="bg-body-secondary" scope="col">Complaint</th>
+                <th class="bg-body-secondary" scope="col">Status</th>
                 <th class="col-lg-3 bg-body-secondary" scope="col">District</th>
-                <th class="col-lg-1 bg-body-secondary" scope="col">Action</th>
             </tr>
             </thead>
             <tbody th:each="complaint : ${complaints}">
-            <tr class="pointer">
-                <td class="">
-                    <div class="fw-semibold" th:text="${complaint.getUser().getUsername()}"></div>
-                </td>
-                <td class="">
-                    <div class="fw-semibold" th:text="${complaint.getComplaintSubject()}"></div>
-                </td>
-                <td class="">
-                    <div class="fw-semibold" th:text="${complaint.getComplaint()}"></div>
-                </td>
-                <td class="">
-                    <div class="fw-semibold" th:text="${complaint.getDistrict()}"></div>
-                </td>
-                <td>
-                    <form class="d-inline">
-                        <span class=""><button class="check btn" data-target="#deleteModal" data-toggle="modal" id="categoryDelete" type="submit">
-                    <i class="bx bx-check-circle"></i>
-                  </button></span>
-                    </form>
-                </td>
-            </tr>
+                <tr class="pointer">
+                    <td class="">
+                        <div class="fw-semibold" th:text="${complaint.getComplaintId()}"></div>
+                    </td>
+                    <td class="">
+                        <div class="fw-semibold" th:text="${complaint.getUser().getUsername()}"></div>
+                    </td>
+                    <td class="">
+                        <div class="fw-semibold" th:text="${complaint.getComplaintSubject()}"></div>
+                    </td>
+                    <td class="">
+                        <div class="fw-semibold" th:text="${complaint.getComplaint()}"></div>
+                    </td>
+                    <td>
+                        <div th:text="${complaint.getStatus().name()}"></div>
+                    </td>
+                    <td class="">
+                        <div class="fw-semibold" th:text="${complaint.getDistrict()}"></div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
+<script>
+    const tableRows = document.querySelectorAll('tbody tr');
 
+    // Add a click event listener to each row
+    tableRows.forEach(row => {
+        row.addEventListener('click', () => {
+            const complaintId = parseInt(row.querySelector('td:first-child').textContent.toString());
+            window.location.href = "/employee/complaints/complaint-details/"+complaintId;
+        });
+    });
+</script>
 </body>
 </html>

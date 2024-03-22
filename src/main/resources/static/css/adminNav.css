@@ -40,7 +40,6 @@ main {
     height: 750px;
     padding-top: 30px;
 }
-
 .header {
     width: 100%;
     height: var(--header-height);

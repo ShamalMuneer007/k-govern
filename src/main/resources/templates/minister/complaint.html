@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html
+        lang="en"
+        xmlns="http://www.w3.org/1999/html"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+
+    <title>K-Govern</title>
+    <meta content="" name="description" />
+    <meta content="" name="keywords" />
+
+    <!-- Favicons -->
+    <link th:href="@{/img/favicon.png}" rel="icon" />
+    <link th:href="@{/img/apple-touch-icon.png}" rel="apple-touch-icon" />
+
+    <!-- Google Fonts -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+            rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link th:href="@{/vendor/aos/aos.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/bootstrap/css/bootstrap.min.css}"
+            rel="stylesheet"
+    />
+    <link
+            th:href="@{/vendor/bootstrap-icons/bootstrap-icons.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet" />
+    <link
+            th:href="@{/vendor/glightbox/css/glightbox.min.css}"
+            rel="stylesheet"
+    />
+    <link th:href="@{/vendor/remixicon/remixicon.css}" rel="stylesheet" />
+    <link th:href="@{/vendor/swiper/swiper-bundle.min.css}" rel="stylesheet" />
+
+    <!-- Template Main CSS File -->
+    <link th:href="@{/css/style2.css}" rel="stylesheet" />
+    <style>
+        .check{
+            font-size: 20px;
+            transition: color 0.4s;
+        }
+        .check:hover{
+            color: forestgreen;
+        }
+    </style>
+</head>
+<body>
+<div th:include="~{frags/ministerNav :: navigation}"></div>
+<div class="container">
+    <div class="section-title pt-2 mt-5">
+        <h2><span th:text="${department}"></span> Department Complaint</h2>
+    </div>
+    <div class="d-flex justify-content-center align-items-center">
+        <div class="card shadow border-1 p-5 pt-3">
+            <div class="card-body" style="font-size: 22px;">
+                <div class="pt-3"><span class="fw-bold mt-5 "> Complaint Id : </span><span th:text="${complaint.getComplaintId()}"></span></div>
+                <div class="pt-5"><span class="fw-bold mt-5"> Issued at: </span><span th:text="${complaint.getIssuedDateTime()}"></span></div>
+                <div class="pt-3"> <span class="fw-bold mt-5" > Subject : </span> <span th:text="${complaint.getComplaintSubject()}"></span></div>
+                <div class="pt-3"><span class="fw-bold mt-5"> Complaint :</span>
+                    <div><span class="bx bxs-circle pe-2" style="font-size: 9px"></span><span class="text-wrap" th:text="${complaint.getComplaint()}"></span></div></div>
+                <div class="pt-3"><span class="fw-bold mt-5">  District :</span> <span th:text="${complaint.getDistrict()}"></span></div>
+                <div class="pt-3"><span class="fw-bold mt-5">  Status :</span> <span th:text="${complaint.getStatus().name().replace('_',' ')}"></span></div>
+                <div class="pt-3"><span class="fw-bold mt-5">Message from user for not responding to the issue : </span>
+                <span th:text="${complaint.getHigherResponse()}"></span>
+                </div>
+                <div class="pt-4 fw-semibold">Change Status : </div>
+                <div class="select-wrapper border-black border p-4 rounded rounded-1">
+                    <form th:action="@{'/minister/complaint/changeStatus/'+${complaint.getComplaintId()}}" method="post">
+                        <div>
+                            <select class="border-none" name="status" required>
+                                <option value="" disabled selected>Select status</option>
+                                <option value="REJECTED" th:unless="${complaint.getStatus().name() == 'REJECTED' || complaint.getStatus().name() == 'RESOLVED'}" class="text-danger">Reject</option>
+                                <option value="IN_PROGRESS" th:unless="${complaint.getStatus().name() == 'REJECTED' || complaint.getStatus().name() == 'RESOLVED' || complaint.getStatus().name() == 'IN_PROGRESS'}" class="text-warning">In progress</option>
+                                <option value="RESOLVED" th:unless="${complaint.getStatus().name() == 'REJECTED' || complaint.getStatus().name() == 'RESOLVED'}" class="text-success">Resolved</option>
+                            </select>
+                        </div>
+                        <div>
+                            <div class="mt-2">Response : </div>
+                            <textarea name="response" style="width: 100%; font-size: 16px" class="p-3" id="response" required></textarea>
+                        </div>
+                        <div>
+                            <button type="submit" class="bg-primary fw-semibold text-white rounded-2 border-0 p-2" style="font-size: 14px">Apply</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>>

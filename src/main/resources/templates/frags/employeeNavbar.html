@@ -59,10 +59,16 @@
 
           <nav id="navbar" class="navbar">
             <ul>
-<!--              <li><a class="nav-link scrollto active" href="#hero">Home</a></li>-->
               <li>
-                <a class="nav-link active" th:href="@{/employee/complaints/}">Complaints</a>
+                  <a class="nav_link"
+                     th:classappend="${requestURI.startsWith('/employee/complaints') ? 'active' : ''}"
+                     th:href="@{/employee/complaints}"> <i class="bx bx-group"></i><span>Complaints</span> </a>
               </li>
+                <li>
+                    <a class="nav_link"
+                       th:classappend="${requestURI.startsWith('/employee/news') ? 'active' : ''}"
+                       th:href="@{/employee/news}"> <i class="bx bx-group"></i><span>News</span> </a>
+                </li>
               <li><a class="nav-link scrollto" href="#about">About</a></li>
               <li class="dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
                 <a href="#"
