@@ -230,9 +230,9 @@
                 </div>
             </div>
             <div th:unless="${complaint.getStatus().name().equals('REJECTED') || complaint.getStatus().name().equals('RESOLVED')}">
-            <div class="pt-4 fw-semibold">Change Status : </div>
-            <div class="select-wrapper border-black border p-4 rounded rounded-1">
-                <form th:action="@{'/employee/complaint/changeStatus/'+${complaint.getComplaintId()}}" method="post">
+            <div th:unless="${complaint.getStatus().name() == 'UNDER_CONSIDERATION'}" class="pt-4 fw-semibold">Change Status : </div>
+            <div th:unless="${complaint.getStatus().name() == 'UNDER_CONSIDERATION'}" class="select-wrapper border-black border p-4 rounded rounded-1">
+                <form  th:action="@{'/employee/complaint/changeStatus/'+${complaint.getComplaintId()}}" method="post">
                     <div>
                 <select class="border-none rounded-2 text-center" name="status" required>
                     <option value="" style="font-size: 11px" disabled selected>Select status</option>

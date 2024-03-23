@@ -89,7 +89,7 @@ public class MinisterController {
             return "redirect:/minister/departments/add-employee/"+department;
         }
         ra.addFlashAttribute("message","Employee added successfully");
-        return "redirect:/minister/departments";
+        return "redirect:/minister/employees/";
 
     }
     @GetMapping("/employees")

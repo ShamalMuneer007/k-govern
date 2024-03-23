@@ -15,7 +15,7 @@ public class ExceptionController {
     public String internalServerError(){
         return "500";
     }
-    
+
     @ExceptionHandler(NotFound.class)
     public String notFoundError(){
         return "400";
