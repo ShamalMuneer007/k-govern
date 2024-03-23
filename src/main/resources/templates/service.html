@@ -93,7 +93,8 @@
 <hr/>
 <div class="text-center fw-bold" style="font-size: 22px">NEWS</div>
 <div class="d-flex justify-content-center align-items-center" style="height: 55vh">
-    <div id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
+    <div class="" th:if="${news.size() == 0}">No news in this department</div>
+    <div th:unless="${news.size() == 0}" id="carouselExampleSlidesOnly" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div th:each="item, iter : ${news}" th:class="${iter.index == 0 ? 'carousel-item active' : 'carousel-item'}">
                 <img class="d-block" th:src="@{'/uploads/'+${item.getImage()}}" style="width: 68vw; object-fit: unset; height: 48vh;" alt="News Image">
