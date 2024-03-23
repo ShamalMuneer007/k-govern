@@ -30,7 +30,9 @@ public class DepartmentComplaint {
     private LocalDate resolvedAt;
     private LocalDate underConsiderationAt;
     private ComplaintStatus status;
-    private String response;
+    private String rejectResponse;
+    private String inProgressResponse;
+    private String resolvedResponse;
     private String district;
     private String userResponse;
     private String higherResponse;

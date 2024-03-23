@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -93,6 +94,7 @@ public class UserController {
             DepartmentComplaint complaint = complaintRepository.findById(complaintId).get();
             complaint.setHigherResponse(message);
             complaint.setStatus(ComplaintStatus.UNDER_CONSIDERATION);
+            complaint.setUnderConsiderationAt(LocalDate.now());
             complaintRepository.save(complaint);
             ra.addFlashAttribute("message", "Complaint sent to higher authority successfully !!!");
             return "redirect:/user/complaints";

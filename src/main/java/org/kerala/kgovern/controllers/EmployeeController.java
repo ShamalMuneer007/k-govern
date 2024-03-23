@@ -115,13 +115,21 @@ public class EmployeeController {
         try {
             DepartmentComplaint complaint = complaintRepository.findById(complaintId).get();
             String status = statusInfo.getStatus();
-            if (status.equals("REJECTED"))
+            if (status.equals("REJECTED")) {
                 complaint.setStatus(ComplaintStatus.REJECTED);
-            if (status.equals("RESOLVED"))
+                complaint.setRejectedAt(LocalDate.now());
+                complaint.setRejectResponse(statusInfo.getResponse());
+            }
+            if (status.equals("RESOLVED")) {
                 complaint.setStatus(ComplaintStatus.RESOLVED);
-            if (status.equals("IN_PROGRESS"))
+                complaint.setResolvedAt(LocalDate.now());
+                complaint.setResolvedResponse(statusInfo.getResponse());
+            }
+            if (status.equals("IN_PROGRESS")) {
                 complaint.setStatus(ComplaintStatus.IN_PROGRESS);
-            complaint.setResponse(statusInfo.getResponse());
+                complaint.setInProgressAt(LocalDate.now());
+                complaint.setInProgressResponse(statusInfo.getResponse());
+            }
             complaintRepository.save(complaint);
             ra.addFlashAttribute("message","Changed complaint status successfully");
             return "redirect:/employee/complaints";
