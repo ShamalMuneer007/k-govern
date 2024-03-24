@@ -6,14 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.kerala.kgovern.Enums.ComplaintStatus;
 import org.kerala.kgovern.dto.ChangeComplaintStatusDto;
 import org.kerala.kgovern.dto.NewsDto;
-import org.kerala.kgovern.entities.DepartmentComplaint;
-import org.kerala.kgovern.entities.DepartmentNews;
-import org.kerala.kgovern.entities.Employee;
-import org.kerala.kgovern.entities.User;
-import org.kerala.kgovern.repositories.DepartmentComplaintRepository;
-import org.kerala.kgovern.repositories.EmployeeRepository;
-import org.kerala.kgovern.repositories.NewsRepository;
-import org.kerala.kgovern.repositories.UserRepository;
+import org.kerala.kgovern.entities.*;
+import org.kerala.kgovern.repositories.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,6 +35,7 @@ public class EmployeeController {
     private final UserRepository userRepository;
     private final DepartmentComplaintRepository complaintRepository;
     private final NewsRepository newsRepository;
+    private final MessageRepository messageRepository;
     @GetMapping("/")
     public String departmentRedirect(){
         return "redirect:/employee/complaints";
@@ -152,6 +147,55 @@ public class EmployeeController {
             return "redirect:/employee/complaints";
         }
     }
+
+    @GetMapping("/messages")
+    public String messages(Model model,HttpServletRequest request){
+        User user = getCurrentUser();
+        Employee employee = employeeRepository.findEmployeeByEmployeeUsername(user.getUsername());
+        String department = employee.getDepartment();
+        List<DepartmentComplaint> complaints = complaintRepository.findByDepartmentAndDistrict(department,employee.getDistrict());
+        complaints = complaints.stream().filter(complaint -> complaint.getStatus().equals(ComplaintStatus.UNDER_CONSIDERATION)).toList();
+        model.addAttribute("complaints",complaints);
+        model.addAttribute("requestURI",request.getRequestURI());
+        model.addAttribute("department",employee.getDepartment());
+        return "employee/messages";
+    }
+    @GetMapping("/messages/chat/{complaintId}")
+    public String chat(Model model, HttpServletRequest request, @PathVariable Long complaintId){
+        User user = getCurrentUser();
+        Employee employee = employeeRepository.findEmployeeByEmployeeUsername(user.getUsername());
+        DepartmentComplaint complaint = complaintRepository.findById(complaintId).get();
+        List<DepartmentMessage> messages = messageRepository.findByComplaintAndDepartmentAndDistrict(complaint,complaint.getDepartment(),complaint.getDistrict());
+        model.addAttribute("messages",messages);
+        model.addAttribute("complaint",complaint);
+        model.addAttribute("employee",employee);
+        model.addAttribute("department",complaint.getDepartment());
+        model.addAttribute("user",user);
+        model.addAttribute("district",complaint.getDistrict());
+        model.addAttribute("requestURI",request.getRequestURI());
+        return "employee/chat";
+    }
+    @PostMapping("/chat/post-chat/{complaintId}")
+    public String postChat(RedirectAttributes ra,@PathVariable Long complaintId,
+                           @RequestParam("message") String message){
+        try{
+            User user =getCurrentUser();
+            DepartmentComplaint complaint = complaintRepository.findById(complaintId).get();
+            DepartmentMessage msg = new DepartmentMessage();
+            msg.setMessage(message);
+            msg.setUser(user);
+            msg.setComplaint(complaint);
+            msg.setDepartment(complaint.getDepartment());
+            msg.setDistrict(complaint.getDistrict());
+            messageRepository.save(msg);
+        }
+        catch (Exception e){
+            ra.addFlashAttribute("errMessage","Something went wrong while sending the message");
+        }
+        return "redirect:/employee/messages/chat/"+complaintId;
+
+    }
+
     // Image upload directory method
     private String fileUploadDir(MultipartFile file) throws IOException {
         String rootPath = System.getProperty("user.dir");

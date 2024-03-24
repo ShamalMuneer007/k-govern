@@ -53,14 +53,13 @@
         .pointer{
             cursor: pointer;
         }
-
     </style>
 </head>
 <body>
 <div th:include="~{frags/ministerNav :: navigation}"></div>
 <div class="container">
     <div class="section-title pt-2 mt-5">
-        <h2><span th:text="${department}"></span> Department Unreported Complaints</h2>
+        <h2><span th:text="${department}"></span> Department Messages</h2>
     </div>
 </div>
 <div class="table-responsive-md box mt-5 d-flex justify-content-center">
@@ -106,7 +105,7 @@
     tableRows.forEach(row => {
         row.addEventListener('click', () => {
             const complaintId = parseInt(row.querySelector('td:first-child').textContent.toString());
-            window.location.href = "/minister/complaints/complaint-details/"+complaintId;
+            window.location.href = "/minister/messages/chat/"+complaintId;
         });
     });
 </script>

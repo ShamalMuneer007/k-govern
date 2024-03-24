@@ -9,14 +9,8 @@ import org.kerala.kgovern.constants.District;
 import org.kerala.kgovern.dto.AddEmployeeDto;
 import org.kerala.kgovern.dto.ChangeComplaintStatusDto;
 import org.kerala.kgovern.dto.NewsDto;
-import org.kerala.kgovern.entities.DepartmentComplaint;
-import org.kerala.kgovern.entities.DepartmentNews;
-import org.kerala.kgovern.entities.Employee;
-import org.kerala.kgovern.entities.User;
-import org.kerala.kgovern.repositories.DepartmentComplaintRepository;
-import org.kerala.kgovern.repositories.EmployeeRepository;
-import org.kerala.kgovern.repositories.NewsRepository;
-import org.kerala.kgovern.repositories.UserRepository;
+import org.kerala.kgovern.entities.*;
+import org.kerala.kgovern.repositories.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -47,6 +41,7 @@ public class MinisterController {
     private final DepartmentComplaintRepository complaintRepository;
     private final NewsRepository newsRepository;
     private final PasswordEncoder passwordEncoder;
+    private final MessageRepository messageRepository;
     @GetMapping("/")
     public String redirect(){
         return "redirect:/minister/employees";
@@ -58,6 +53,17 @@ public class MinisterController {
         model.addAttribute("districts", District.districts);
         model.addAttribute("requestURI",request.getRequestURI());
         return "minister/addEmployee";
+    }
+    @GetMapping("/employees")
+    public String departmentInfo(Model model, HttpServletRequest request){
+        User user = getCurrentUser();
+        Employee employee = employeeRepository.findEmployeeByEmployeeUsername(user.getUsername());
+        String department = employee.getDepartment();
+        List<Employee> employees = employeeRepository.findByDepartmentAndIsHeadFalse(department);
+        model.addAttribute("employees",employees);
+        model.addAttribute("requestURI",request.getRequestURI());
+        model.addAttribute("department",department);
+        return "minister/department";
     }
     @PostMapping("/add-employee/{department}")
     @Transactional
@@ -80,7 +86,7 @@ public class MinisterController {
             employee.setHead(false);
             employee.setDepartment(department);
             employee.setEmployee(user);
-            employee.setDistrict(temp.getDistrict());
+            employee.setDistrict(employeeDto.getDistrict());
             employeeRepository.save(employee);
         }
         catch (Exception e){
@@ -89,20 +95,57 @@ public class MinisterController {
             return "redirect:/minister/departments/add-employee/"+department;
         }
         ra.addFlashAttribute("message","Employee added successfully");
-        return "redirect:/minister/employees/";
+        return "redirect:/minister/employees";
 
     }
-    @GetMapping("/employees")
-    public String departmentInfo(Model model, HttpServletRequest request){
+    @GetMapping("/messages")
+    public String messages(Model model,HttpServletRequest request){
         User user = getCurrentUser();
         Employee employee = employeeRepository.findEmployeeByEmployeeUsername(user.getUsername());
         String department = employee.getDepartment();
-        List<Employee> employees = employeeRepository.findByDepartmentAndIsHeadFalse(department);
-        model.addAttribute("employees",employees);
+        List<DepartmentComplaint> complaints = complaintRepository.findByDepartment(department);
+        complaints = complaints.stream().filter(complaint -> complaint.getStatus().equals(ComplaintStatus.UNDER_CONSIDERATION)).toList();
+        model.addAttribute("complaints",complaints);
         model.addAttribute("requestURI",request.getRequestURI());
-        model.addAttribute("department",department);
-        return "minister/department";
+        model.addAttribute("department",employee.getDepartment());
+        return "minister/messages";
     }
+    @GetMapping("/messages/chat/{complaintId}")
+    public String chat(Model model, HttpServletRequest request, @PathVariable Long complaintId){
+        User user = getCurrentUser();
+        Employee employee = employeeRepository.findEmployeeByEmployeeUsername(user.getUsername());
+        DepartmentComplaint complaint = complaintRepository.findById(complaintId).get();
+        List<DepartmentMessage> messages = messageRepository.findByComplaintAndDepartmentAndDistrict(complaint,complaint.getDepartment(),complaint.getDistrict());
+        model.addAttribute("messages",messages);
+        model.addAttribute("complaint",complaint);
+        model.addAttribute("employee",employee);
+        model.addAttribute("department",complaint.getDepartment());
+        model.addAttribute("user",user);
+        model.addAttribute("district",complaint.getDistrict());
+        model.addAttribute("requestURI",request.getRequestURI());
+        return "minister/chat";
+    }
+    @PostMapping("/chat/post-chat/{complaintId}")
+    public String postChat(RedirectAttributes ra,@PathVariable Long complaintId,
+                           @RequestParam("message") String message){
+        try{
+            User user =getCurrentUser();
+            DepartmentComplaint complaint = complaintRepository.findById(complaintId).get();
+            DepartmentMessage msg = new DepartmentMessage();
+            msg.setMessage(message);
+            msg.setUser(user);
+            msg.setComplaint(complaint);
+            msg.setDepartment(complaint.getDepartment());
+            msg.setDistrict(complaint.getDistrict());
+            messageRepository.save(msg);
+        }
+        catch (Exception e){
+            ra.addFlashAttribute("errMessage","Something went wrong while sending the message");
+
+        }
+        return "redirect:/minister/messages/chat/"+complaintId;
+    }
+
 
     @GetMapping("/complaints/complaint-details/{complaintId}")
     public String complaintDetails(@PathVariable(name = "complaintId")Long complaintId, Model model, HttpServletRequest request){

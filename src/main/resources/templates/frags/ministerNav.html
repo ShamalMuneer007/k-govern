@@ -62,6 +62,7 @@
           <li><a class="nav-link scrollto" th:classappend="${requestURI.startsWith('/minister/complaints') ? 'active' : ''}" th:href="@{/minister/complaints}">Complaints</a></li>
           <li><a class="nav-link scrollto" th:classappend="${requestURI.startsWith('/minister/employees') ? 'active' : ''}" th:href="@{/minister/employees}">Employees</a></li>
           <li><a class="nav-link scrollto" th:classappend="${requestURI.startsWith('/minister/news') ? 'active' : ''}" th:href="@{/minister/news}">News</a></li>
+          <li><a class="nav-link scrollto" th:classappend="${requestURI.startsWith('/minister/messages') ? 'active' : ''}" th:href="@{/minister/messages}">Messages</a></li>
 
           <li>
                 <form th:action="@{/logout}" method="post" class="flex justify-content-center">

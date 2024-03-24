@@ -62,14 +62,18 @@
               <li>
                   <a class="nav_link"
                      th:classappend="${requestURI.startsWith('/employee/complaints') ? 'active' : ''}"
-                     th:href="@{/employee/complaints}"> <i class="bx bx-group"></i><span>Complaints</span> </a>
+                     th:href="@{/employee/complaints}"><span>Complaints</span> </a>
               </li>
                 <li>
                     <a class="nav_link"
                        th:classappend="${requestURI.startsWith('/employee/news') ? 'active' : ''}"
-                       th:href="@{/employee/news}"> <i class="bx bx-group"></i><span>News</span> </a>
+                       th:href="@{/employee/news}"><span>News</span> </a>
                 </li>
-              <li><a class="nav-link scrollto" href="#about">About</a></li>
+              <li>
+                <a class="nav_link"
+                   th:classappend="${requestURI.startsWith('/employee/messages') ? 'active' : ''}"
+                   th:href="@{/employee/messages}"><span>Messages</span> </a>
+              </li>
               <li class="dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
                 <a href="#"
                   >Profile Settings</a>
