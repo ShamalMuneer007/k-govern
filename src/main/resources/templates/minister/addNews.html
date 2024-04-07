@@ -79,7 +79,7 @@
         <textarea name="newsContent" class="rounded-2 p-2" required type="text" style="height: 100px;"></textarea>
         <h5 class="fw-semibold mt-3">Expiry Date</h5>
         <input name="expiryDate" class="rounded-2 p-2" required type="date" min="<?php echo date('Y-m-d'); ?>" />
-        <input type="file" class="mt-4" accept="image/*" name="file">
+        <input type="file" class="mt-4" required accept="image/*" name="file">
         <div class="d-flex justify-content-center">
             <button type="submit" class="btn-primary bg-primary mt-4 border-0 rounded-3 text-white" style="width: 100px; height: 40px;">Submit</button>
         </div>

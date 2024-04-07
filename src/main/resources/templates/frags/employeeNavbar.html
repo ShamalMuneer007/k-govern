@@ -74,10 +74,6 @@
                    th:classappend="${requestURI.startsWith('/employee/messages') ? 'active' : ''}"
                    th:href="@{/employee/messages}"><span>Messages</span> </a>
               </li>
-              <li class="dropdown" th:if="${#authorization.expression('isAuthenticated()')}">
-                <a href="#"
-                  >Profile Settings</a>
-              </li>
                 <li class="ps-3">
                     <form th:action="@{/logout}" method="post" class="flex justify-content-center">
                         <button class="text-danger bg-white border-0">Logout</button>
